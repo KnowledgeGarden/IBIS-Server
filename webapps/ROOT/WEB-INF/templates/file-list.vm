@@ -1,0 +1,17 @@
+## convert a list of files into HTML as a file list
+<a href="IBISServerClient.zip"><b>Download Client</b></a><br />
+<a href="IBIS-Format.pdf"><b>Download Common Format Paper</b></a><br />
+<h2>Files</h2>
+<table border="1">
+ <tbody>
+#foreach( $file in $filelist ) ##ArrayList
+  	  #set( $filename = $file.get(0) )
+	  	  #set( $platform = $file.get(1) )
+	  	  #set( $description = $file.get(2) )
+	  	  #set( $author = $file.get(3) )
+	  	  <tr>
+	  	  <td><a href="get/$platform/$filename">$filename</a></td><td>$platform</td><td>$author</td><td>$description</td>
+	  	  </tr>
+	#end
+	 </tbody>
+	</table>

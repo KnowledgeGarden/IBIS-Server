@@ -1,0 +1,40 @@
+## form for hand entering files
+<table >
+ <tbody>
+  <!-- editor form -->
+  <tr>
+	   <td style="vertical-align: top; width: 16%;">
+	    <center>
+	     <h2>File Entry Form</h2>
+	     <form method="post" action="AcceptFile">
+	 	      <table>
+	       <tbody>
+	        <tr>
+	         <td width="20%">File Name</td>
+	         <td><input type="text" name="fileName" value="" size="64"></td>
+	        </tr>
+	        <tr>
+	         <td width="20%">Platform cm/dg/dm/co</td>
+	         <td><input type="text" name="platform" value="" size="64"></td>
+	        </tr>
+	        <tr>
+	         <td width="20%">Description</td>
+	         <td><input type="text" name="description" value="" size="64"></td>
+	        </tr>
+	        <tr>
+	         <td width="20%">File Text</td>
+	         <td><textarea name="cargo"  cols="50" rows="10"></textarea></td>
+	        </tr>
+	        <tr>
+	         <td align="center">
+		          <input aligh="center" TYPE="submit" VALUE=" Submit ">                                  
+		         </td>
+		        </tr>
+		       </tbody>
+	      </table>
+	     </form>
+ 	   </center>
+   </td>
+  </tr>
+ </tbody>
+</table>

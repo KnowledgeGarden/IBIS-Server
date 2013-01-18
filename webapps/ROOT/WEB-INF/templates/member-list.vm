@@ -1,0 +1,4 @@
+<h2>Members</h2>
+#foreach( $member in $memberlist ) ##ArrayList
+  	  $member<br />
+	#end

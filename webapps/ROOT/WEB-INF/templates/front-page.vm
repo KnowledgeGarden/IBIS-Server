@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>IBIS Server</title>
+   <meta name="keywords" content="" />
+   <meta name="description" content="Serving IBIS Conversations" />
+ </head>
+ <body>
+  
+  <h1>IBIS Server</h1>
+  #if($IsAuthenticated)
+    <a href="/Logout">Logout</a><br />
+    <a href="/load">Load a file...</a><br />
+  #else
+  	  <a href="/Login">Login</a><br />
+  	#end
+  	#if ($IsAdmin)
+  		  <a href="/admin">Administrator's View</a>
+  		#end
+  <hr>
+  #parse("front-content.vm")
+ </body>
+</html>

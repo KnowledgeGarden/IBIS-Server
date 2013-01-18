@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+
+<!-- ======================================================================= -->
+<!-- IBIS Server                                                    -->
+<!-- ======================================================================= -->
+
+<project name="IbisServer" default="compile" basedir=".">
+
+	<!-- Site-specific properties -->
+	<property file="build.properties" />
+
+	<property name="app.name" value="IbisServer" />
+	<property name="app.version" value="1.0" />
+
+	<property name="basedir" value="." />
+
+
+
+	<property name="compile.dir" value="${basedir}/classes" />
+	<property name="config.dir" value="${basedir}/config" />
+	<property name="data.dir" value="${basedir}/data" />
+	<property name="webbuild.dir" value="${basedir}/webbuild" />
+
+	<property name="src.dir" value="${basedir}/src/java" />
+	<property name="lib2.dir" value="${basedir}/lib" />
+	<property name="lib.dir" value="${basedir}/webapps/ROOT/WEB-INF/lib" />
+	<property name="websrc.dir" value="${basedir}/deployment/web/webapps/bma" />
+
+	<property name="javadoc.dir" value="${basedir}/docs/javadoc" />
+	<property name="app.jar" value="${basedir}/webapps/ROOT/WEB-INF/lib/${app.name}-${app.version}.jar" />
+	<property name="webapp.war" value="${basedir}/${app.name}-${app.version}.war" />
+
+
+	<property name="compile.debug" value="on" />
+	<property name="compile.deprecation" value="on" />
+	<property name="complle.optimize" value="on" />
+
+	<!-- Tomcat settings -->
+	<property name="webapp.path" value="/" />
+
+
+	<!-- =================================================================== -->
+	<!-- Classpath etc.                                                      -->
+	<!-- =================================================================== -->
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib2.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<path id="run.classpath">
+		<fileset dir="${lib2.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<path id="test.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${basedir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Sourcepath (for javadoc)       -->                                     
+	<path id="source.path">
+	</path>
+
+
+	<!-- =================================================================== -->
+	<!-- Clean                                                               -->
+	<!-- =================================================================== -->
+	<target name="clean" description="Removes generated files">
+		<delete dir="${compile.dir}" />
+		<delete dir="${javadoc.dir}" />
+		<delete dir="${webbuild.dir}" />
+	</target>
+
+
+	<!-- =================================================================== -->
+	<!-- Compile                                                             -->
+	<!-- =================================================================== -->
+
+	<!-- Prepares the build process -->
+	<target name="prepare">
+		<tstamp />
+		<mkdir dir="${compile.dir}" />
+	</target>
+
+
+	<target name="compile" description="Compiles the core class files">
+		<javac srcdir="${src.dir}" destdir="${compile.dir}" debug="${compile.debug}" 
+			deprecation="${compile.deprecation}" optimize="${optimize}" target="1.5">
+			<classpath refid="build.classpath" />
+		</javac>
+		<jar file="${app.jar}" basedir="${compile.dir}" />
+
+	</target>
+
+	<target name="jar" description="builds a jar file">
+		<jar file="${app.jar}" basedir="${compile.dir}" />
+	</target>
+
+
+
+
+	<!-- =================================================================== -->
+	<!-- Javadoc                                                             -->
+	<!-- =================================================================== -->
+	<target name="javadoc" depends="compile" description="Creates the API documentation">
+		<mkdir dir="${javadoc.dir}" />
+		<javadoc packagenames="com.*, org.*" destdir="${javadoc.dir}" author="true" version="true" use="true" windowtitle="${app.name} ${version} API" doctitle="${app.name} ${version} API">
+			<classpath refid="build.classpath" />
+			<sourcepath refid="source.path" />
+		</javadoc>
+	</target>
+
+
+
+
+	<!-- =================================================================== -->
+	<!-- Non-Web application targets                                         -->
+	<!-- =================================================================== -->
+	<target name="runMainframe">
+		<java fork="yes" classname="org.nex.ts.core.main.MainApplication" classpathref="run.classpath">
+			<arg value="${basedir}/webapps/ROOT/WEB-INF/core-portal-props.xml" />
+		</java>
+	</target>
+
+	<target name="initDatabases" >
+		<java  fork="yes" classname="org.nex.ts.core.smp.SubjectMapProvider" classpathref="run.classpath">
+			<arg value="${basedir}/webapps/ROOT/WEB-INF/core-portal-props.xml" />
+			<arg value="clearboot" />
+		</java>
+	</target>
+
+
+	<!--
+		Commandline for exportMap
+		ant -DfilePath=foo.xml exportMap
+	-->
+
+	<target name="exportMap" depends="compile">
+		<java fork="yes" classname="org.nex.ts.smp.util.MapExportUtility" classpathref="run.classpath">
+			<arg value="${config.dir}/test_logger.properties" />
+			<arg value="${basedir}/webapps/ROOT/WEB-INF/core-portal-props.xml" />
+			<arg value="${filePath}" />
+		</java>
+	</target>
+
+
+
+</project>
+

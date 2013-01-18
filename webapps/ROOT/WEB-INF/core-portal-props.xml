@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!-- IBIS Portal Properties
+	@author Jack Park
+	@license LGPL
+	@copyright 2005,2009 Jack Park
+	
+	-->
+
+<properties>
+	<parameter name="Version" value="1" />
+	<parameter name="PortalName" value="IBIS Server" />
+	<parameter name="PortalURL" value="/" />
+	
+
+	<parameter name="PortalPort" value="8080" />
+	
+	<!-- base directory of portal installation -->
+	<parameter name="PortalFileBase" value = "webapps/ROOT/" />
+	
+	<!-- 1= true 0=false -->
+	<parameter name="IsDebug" value = "1" />
+	<!--
+		1= true means the website will not paint to unauthenticated viewers
+		0= false means the website is generally open to viewing -->
+	<parameter name="NeedAuthentication" value = "0" />
+
+	<!--
+		1= true means the website will allow /NewAccount/ to be used
+		0= false means the website requires an Admin to create a new account -->
+	<parameter name="AllowNewAccounts" value = "1" />
+		
+	<!-- change this to servlet log properties -->
+	<parameter name="MyLogPath" value="logger.properties" /> 
+
+	<parameter name="MyDataPath" value="webapps/ROOT/data/" /> 
+	
+	<parameter name="MyTextIndexPath" value="webapps/ROOT/WEB-INF/index/text/" /> 
+
+	<parameter name="MapCacheSize" value="1024" /> 
+
+	<list name = "DocumentTypes">
+		<parameter name = "Compendium" value = "cm" /> 
+		<parameter name = "DebateGraph" value = "dg" />
+		<parameter name = "Deliberatorium" value = "dm" />
+		<parameter name = "Cohere" value = "co" />
+	</list>
+
+	
+	<!-- RdbmsEngine drivers 
+		There are several databases needed, each with its own databaseURL,
+		which allows for each database to be located on separate servers.
+		Each is hardwired to use the same driver, user and password 
+	<parameter name="MyDatabaseDriver" value="com.mysql.jdbc.Driver" />
+	<parameter name="MyDatabaseURL" value="jdbc:mysql:///" /> 
+	 -->
+	<parameter name="UserDatabase" value="ibisusers" />run
+	
+	<parameter name="MyDatabaseUser" value = "nexistw" />
+	<parameter name="MyDatabasePwd"  value = "" />
+	<!-- files -->	
+	<parameter name="MyDatabase" value="ibisfiles" />
+	<!-- users -->
+	<parameter name="UserDatabaseURL" value="jdbc:mysql:///" />
+
+
+	<!-- required for bootstrapping -->
+	<parameter name="DefaultAdminName" value = "defaultadmin" />
+	<parameter name="DefaultAdminPwd" value = "xya!123" />
+	<parameter name="DefaultAdminFullName" value = "DefaultOmin" />
+	
+
+</properties>
+

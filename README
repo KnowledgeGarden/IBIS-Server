@@ -1,0 +1,82 @@
+IBIS-Server
+License: LGPL
+Technology: Java, Jetty Servlet
+
+DESCRIPTION
+An experimental platform originally created for the purpose of "federating" IBIS conversations
+from platforms such as Compendium, DebateGraph, Deliberatorium, Cohere, and others. As
+an experimental platform, it is, by and large, incomplete in terms of its implementation
+potential for that specific mission.
+
+The PDF file IBIS-Format.pdf describes a candidate XML file format which can satisfy the
+equivalent of a "least common denominator" among the four platforms for which this work
+originally anticipated. 
+
+A credentialed user can download a zip file of the IBIS Server Client from the website
+this server creates.
+
+The fact that there is the ability to send and receive files from a desktop client means that
+this platform offers a limited kind of Web Services protocol.
+
+At the same time, it offers a base on which an interesting form of collaboration among
+varieties of structured conversation platforms could interoperate.
+
+Current Capabilities
+Originally boots with a default administrative credentials. 
+Administrators are the only means by which new users can be granted credentials.
+Once a user is granted credentials (login and password), that user is then free
+	to log into the desktop IBIS Server Client using those credentials and
+	upload or download files.
+FILE TYPE CODES used at IBIS Server Client
+	Compendium 		= cm
+	Debategraph 	= dg
+	Cohere 			= co
+	Deliberatorium	= dm
+
+Current Limitations
+1- Does not provide clean path of error messaging to desktop client
+2- No Administrative way to delete a Compendium XML file reference from the RDBMS
+3- Internal handling of related materials, e.g. the client zip file, other documents,
+	is presently hard-wired; could easily be changed to using the /data/index.html
+	as a means by which any document could be referenced.
+4- There are certain issues related to Compendium XML exports: they are exported in
+	UTF-16 format, which means they do not always appear as clean text when examined
+	in windows with this software. That is not necessarily an issue, certainly a nuisance.
+	But, there are additional classes in the project, not presently used, which parse
+	those files for other eventual uses, such as displaying conversations at the website,
+	searching and indexing them, and so forth. Occasional experiments have discovered
+	issues related to UTR-16. They are solvable. The class CommonImportPullParser exists
+	for that purpose. Its use opens one other issue.
+5- CommonImportPullParser is not yet skilled at detecting the conversation's root node,
+	especially when some conversations do not resolve to a single root node. Work done in
+	other projects evolves solutions to that. This class may not benefit; it warrants
+	testing and further evolution. That class will be useful when the server is extended
+	to other use cases.
+	
+Debugging Notes
+There are two Derby databases, each in the webapps/ROOT/data/ directory.
+	One is the directory "ibisusers", the other is "ibisfiles".
+	On initial boot of the system, if those two directories exist, there is the risk of
+	an SQL Exception which says the "file already exists" referring to the directory.
+	So on initial bootup, those two directories should not exist.
+	If you decide to toss away a database to start fresh, toss out the entire directory.
+	The code contains lots of debugging log statements to track this issue.
+	
+USAGE:
+This is an Eclipse project. To use it otherwise, a suitable Ant build file will be needed;
+a build.xml exists, in which case, it creates a server jar file with replaces classes.
+it can be converted to a Maven project if desired.
+
+The directory layout is that of a Jetty Servlet. The system must compile classes into
+the /webapps/ROOT/WEB-INF/classes/ directory.
+
+There are certain properties in the file /webapps/ROOT/WEB-INF/core-portal-props.xml which
+related to a default administrator as user. They can be configured to suit.
+
+To boot the platform, boot either run.bat or run.sh.
+Login as default administrator.
+Use the Administrator Veiw to add yourself as a user. Add other users as needed.
+
+When files are uploaded from a desktop client, they will show up on the Files list
+of the front page.
+	

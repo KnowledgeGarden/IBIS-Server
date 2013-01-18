@@ -1,0 +1,23 @@
+<form name="form1" method="post" action="/admin/StartNewAccount">
+ <input name="userId" value="-1" type="hidden">
+  <table>
+   <tbody>
+    <tr>
+     <td><label for="registerLogin">Login</label>:</td>
+     <td><input name="login" value="" id="registerLogin" type="text"></td>
+   </tr>
+   <tr>
+    <td><label for="registerNewPassword">New password</label>:</td>
+    <td><input name="newPassword" value="" id="registerNewPassword" type="password"></td>
+   </tr>
+	   <tr>
+    <td><label for="registerConfirmPassword">Confirm newpassword</label>:</td>
+    <td><input name="confirmPassword" value="" id="registerConfirmPassword" type="password"></td>
+   </tr>
+   <tr>
+    <td colspan="2" align="center"><input name="function" value="Save" type="submit"></td>
+   </tr>
+  </tbody>
+ </table>
+</form>
+

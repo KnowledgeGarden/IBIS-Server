@@ -1,0 +1,18 @@
+<form method="post" action="/authenticate">
+	 <input type="hidden" name="target" value="/" />
+ <table>
+  <tbody>
+   <tr>
+	    <td><label for="loginUsername">Username</label></td>
+	    <td><input type="text" name="username" value="" id="loginUsername" /></td>
+   </tr>
+   <tr>
+	    <td><label for="loginPassword">Password</label></td>
+	    <td><input type="password" name="password" id="loginPassword" /></td>
+   </tr>
+   <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="submit" name="function" value="Login" /></td>
+   </tr>
+ </table>
+</form>

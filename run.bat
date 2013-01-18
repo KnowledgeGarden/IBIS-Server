@@ -1,0 +1,1 @@
+java -Xms256M -Xmx1024m -jar start.jar
